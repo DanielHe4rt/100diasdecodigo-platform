@@ -29,7 +29,7 @@ type ConnectedAccountProps = ({
 
 export default function ConnectedAccount(props: ConnectedAccountProps) {
     const route = useRoute();
-
+    console.log(props)
     return (
         <div>
             <div className='px-3 flex items-center justify-between'>
@@ -71,7 +71,3 @@ export default function ConnectedAccount(props: ConnectedAccountProps) {
         </div>
     );
 }
-
-<template v-if='hasAccountForProvider(provider)'>
-
-</template>;

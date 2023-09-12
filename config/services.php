@@ -38,7 +38,8 @@ return [
     'twitter' => [
         'client_id' => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect' => env('TWITTER_REDIRECT_URI')
+        'redirect' => env('TWITTER_REDIRECT_URI'),
+        'oauth' => 2,
     ],
     'discord' => [
         'client_id' => env('DISCORD_CLIENT_ID'),

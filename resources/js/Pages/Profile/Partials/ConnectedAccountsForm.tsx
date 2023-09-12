@@ -79,6 +79,10 @@ export default function ConnectedAccountsForm() {
                 {
                     socialStream.providers.map(provider => {
                         const connectedAccount = socialStream.connectedAccounts.find(account => {
+                            // @ts-ignore
+                            if (account.provider === 'twitter') {
+                                account.provider = 'twitter-oauth-2'
+                            }
                             return account.provider === provider;
                         });
 

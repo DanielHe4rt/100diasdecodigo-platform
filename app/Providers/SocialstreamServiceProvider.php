@@ -11,6 +11,7 @@ use App\Actions\Socialstream\SetUserPassword;
 use App\Actions\Socialstream\UpdateConnectedAccount;
 use Illuminate\Support\ServiceProvider;
 use JoelButcher\Socialstream\Socialstream;
+use Laravel\Socialite\Two\TwitterProvider;
 
 class SocialstreamServiceProvider extends ServiceProvider
 {
@@ -34,5 +35,16 @@ class SocialstreamServiceProvider extends ServiceProvider
         Socialstream::setUserPasswordsUsing(SetUserPassword::class);
         Socialstream::handlesInvalidStateUsing(HandleInvalidState::class);
         Socialstream::generatesProvidersRedirectsUsing(GenerateRedirectForProvider::class);
+
+        $this->app->extend(TwitterProvider::class, function ($repository, $app) {
+
+            // Only in Scylla Related migrations -> rebuild commands
+            return new \App\Providers\Socialstream\TwitterProvider(
+                request: request(),
+                clientId: config('services.twitter.client_id'),
+                clientSecret: config('services.twitter.client_secret'),
+                redirectUrl: config('services.twitter.redirect'),
+            );
+        });
     }
 }
